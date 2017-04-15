@@ -1,0 +1,25 @@
+// This file overrides the built-in C++ (simple) runner
+// For more information see http://docs.c9.io:8080/#!/api/run-method-run
+{
+  "script": [
+    "set -e",
+    "cd /home/ubuntu/workspace/c-cpp/hello-world",
+    "if [ \"$debug\" == true ]; then ",
+    "/usr/bin/g++ -ggdb3 -o0 -std=c++11 helloWorld.c addVars.c -o app.o",
+    "chmod 755 \"app.o\"",
+    "node $HOME/.c9/bin/c9gdbshim.js \"./app.o\" $args",
+    "else",
+    "g++ -std=c++11 helloWorld.c addVars.c -o app.o",
+    "chmod 755 app.o",
+    "./app.o $args",
+    "fi"
+  ],
+  "info": "Running Project",
+  "debugport": 15470,
+  "debugger": "gdb",
+  "executable": "./app.o",
+  "maxdepth": 50,
+  "$debugDefaultState": false,
+  "env": {},
+  "selector": "^.*\\.(cpp|cc)$"
+}
